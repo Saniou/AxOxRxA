@@ -10,10 +10,14 @@ import CustomButton from '@/components/CustomButton';
 export default function HomeScreen() {
   return (
     <SafeAreaView className='bg-black h-full'>
+
       <ScrollView contentContainerStyle={{ height: '100%' }}>
+
         <View className='w-full justify-center items-center min-h-[85vh] px-4'>
+
           <Image source={images.logo} className='w-[130px] h-[84px]' resizeMode='contain' />
           <Image source={images.cards} className="max-w-[380px] w-full h-[300px]" resizeMode='contain' />
+
           <View className='relative mt-5'>
             <Text className="text-white text-3xl font-bold text-center">
               Discover Endless           Posibilities with
@@ -21,6 +25,7 @@ export default function HomeScreen() {
             </Text>
             <Image source={images.path} className='w-[130px] h-[15px] absolute -bottom-3 -right-1' />
           </View>
+          
           <Text className='flex- text-sm font-pregular text-gray-100 mt-8 text-center'>
             Where Creativity Meets Innovation: Embark on a Journey of Limitless Exploration with Aora
           </Text>
@@ -36,6 +41,7 @@ export default function HomeScreen() {
         <StatusBar backgroundColor='#000' style='light' />
 
       </ScrollView>
+
     </SafeAreaView>
   );
 }
