@@ -1,6 +1,7 @@
 import { View, Text, SafeAreaView, ScrollView, Image, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { Link, router } from 'expo-router'
+import { useGlobalContext } from '@/context/GlobalProvider'
 
 import { images } from '@/constants'
 import FormField from '@/components/FormField'
@@ -9,29 +10,33 @@ import { createUser } from '@/lib/appwrite'
 
 const SignUp = () => {
 
-  const [form, setForm] = useState({
-    email: '',
-    password: '',
-    userName: '',
-  })
+  const { setUser, setIsLogged } = useGlobalContext();
 
-  const [isSubmitting, setIsSubmiting] = useState(false)
+  const [isSubmitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
   const submit = async () => {
-    if(!form.email || !form.password || !form.userName) {
-      Alert.alert('Error', 'Please fill in all the fields')
+    if (form.username === "" || form.email === "" || form.password === "") {
+      Alert.alert("Error", "Please fill in all fields");
     }
-    setIsSubmiting(true)
 
+    setSubmitting(true);
     try {
-      const result = await createUser(form.email, form.password, form.userName)
-      router.replace('/home')
-    } catch (err) {
-      Alert.alert('Error', err.message)
+      const result = await createUser(form.email, form.password, form.username);
+      setUser(result);
+      setIsLogged(true);
+
+      router.replace("/home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
     } finally {
-      setIsSubmiting(false)
+      setSubmitting(false);
     }
-  }
+  };
 
   return (
     <SafeAreaView className="bg-black h-full ">
